@@ -1,0 +1,2 @@
+"id","age","workclass_id","workclass_name","education_level_id","education_level_name","education_num","marital_status_id","marital_status_name","occupation_id","occupation_name","relationship_id","relationship_name","race_id","race_name","sex_id","sex_name","capital_gain","capital_loss","hours_week","country_id","country_name","over_50k"
+2,50,7,"Self-emp-not-inc",10,"Bachelors",13,3,"Married-civ-spouse",5,"Exec-managerial",1,"Husband",5,"White",2,"Male",0,0,13,40,"United-States",false
