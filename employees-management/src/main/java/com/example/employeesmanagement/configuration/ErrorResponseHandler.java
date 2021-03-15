@@ -3,6 +3,9 @@ package com.example.employeesmanagement.configuration;
 import javax.xml.bind.annotation.XmlRootElement;
 import java.util.List;
 
+/**
+ * Define response format for handling error
+ */
 @XmlRootElement(name = "error")
 public class ErrorResponseHandler
 {

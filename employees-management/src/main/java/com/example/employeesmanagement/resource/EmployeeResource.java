@@ -1,11 +1,9 @@
 package com.example.employeesmanagement.resource;
 
+import com.example.employeesmanagement.common.Utility;
 import com.example.employeesmanagement.services.EmployeeService;
 import com.example.employeesmanagement.services.dto.EmployeeDTO;
-import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.ObjectWriter;
-import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.dataformat.csv.CsvGenerator;
 import com.fasterxml.jackson.dataformat.csv.CsvMapper;
 import com.fasterxml.jackson.dataformat.csv.CsvSchema;
@@ -25,17 +23,15 @@ import java.io.*;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.*;
-import java.util.stream.Collectors;
 
+/**
+ * Controller API resources
+ */
 @RestController
 @RequestMapping("/api")
 public class EmployeeResource {
 
     private final Logger log = LoggerFactory.getLogger(EmployeeResource.class);
-
-    private static final String FILE_PATH = "src/main/resources/employees.csv";
-
-    private static final File file = new File(FILE_PATH);
 
     private final EmployeeService employeeService;
 
@@ -44,6 +40,11 @@ public class EmployeeResource {
     }
 
 
+    /**
+     * @param pageable paging configuration
+     * @param request Client request
+     * @return JSON Object
+     */
     @GetMapping("/employees")
     public ResponseEntity<Map<String, Object>> getAllEmployees(Pageable pageable, HttpServletRequest request) {
         Map<String, Object> response = new HashMap<>();
@@ -98,6 +99,11 @@ public class EmployeeResource {
         }
     }
 
+    /**
+     * @param pageable paging configuration
+     * @param request Client request
+     * @return
+     */
     @GetMapping("/employees/csv")
     public ResponseEntity<Object> getAllEmployeesCSV(Pageable pageable, HttpServletRequest request) {
         try {
@@ -113,8 +119,8 @@ public class EmployeeResource {
 
             employeesData = pageEmployees.getContent();
 
-            if (writeDataToFile(employeesData)) {
-                InputStreamResource resource = new InputStreamResource(new FileInputStream(file));
+            if (Utility.writeDataToFile(employeesData)) {
+                InputStreamResource resource = new InputStreamResource(new FileInputStream(Utility.file));
                 DateFormat dateFormatter = new SimpleDateFormat("dd-MM-yyyy_HH-mm-ss");
                 String currentDateTime = dateFormatter.format(new Date());
                 return ResponseEntity.ok()
@@ -130,26 +136,5 @@ public class EmployeeResource {
         }
     }
 
-
-    private static boolean writeDataToFile(List<EmployeeDTO> employeesData) {
-        try {
-
-            CsvMapper csvMapper = new CsvMapper();
-            csvMapper.enable(CsvGenerator.Feature.ALWAYS_QUOTE_STRINGS);
-            CsvSchema csvSchema = csvMapper.schemaFor(EmployeeDTO.class).withUseHeader(true);
-            ObjectWriter myObjectWriter = csvMapper.writer(csvSchema);
-            File tempFile = new File(FILE_PATH);
-            FileOutputStream tempFileOutputStream = new FileOutputStream(tempFile);
-            BufferedOutputStream bufferedOutputStream = new BufferedOutputStream(tempFileOutputStream, 1024);
-            OutputStreamWriter writerOutputStream = new OutputStreamWriter(bufferedOutputStream, "UTF-8");
-            myObjectWriter.writeValue(writerOutputStream, employeesData);
-            return true;
-        }
-        catch (IOException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-            return false;
-        }
-    }
 
 }

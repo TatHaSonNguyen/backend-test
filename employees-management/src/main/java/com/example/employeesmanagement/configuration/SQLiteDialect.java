@@ -15,7 +15,6 @@ import java.sql.Types;
 
 public class SQLiteDialect extends Dialect {
 
-    // Handle limit offset
     private static final AbstractLimitHandler LIMIT_HANDLER = new AbstractLimitHandler() {
         @Override
         public String processSql(String sql, RowSelection selection) {
@@ -33,6 +32,7 @@ public class SQLiteDialect extends Dialect {
             return true;
         }
     };
+
     public SQLiteDialect() {
         registerColumnType(Types.BIT, "integer");
         registerColumnType(Types.TINYINT, "tinyint");

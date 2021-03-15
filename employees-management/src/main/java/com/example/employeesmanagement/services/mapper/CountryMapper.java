@@ -5,6 +5,11 @@ import com.example.employeesmanagement.services.dto.CountryDTO;
 import org.mapstruct.Mapper;
 import org.springframework.stereotype.Service;
 
+/**
+ * Mapping and convert between DTOObject and EntityObject
+ * DTOObject: CountryDTO
+ * EntityObject: Country
+ */
 @Mapper(componentModel = "spring")
 public interface CountryMapper {
 

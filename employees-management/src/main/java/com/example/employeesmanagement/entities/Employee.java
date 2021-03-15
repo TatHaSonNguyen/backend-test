@@ -2,6 +2,11 @@ package com.example.employeesmanagement.entities;
 
 import javax.persistence.*;
 
+/**
+ * Define EntityObject Class to map with Entity Object in DB
+ * EntityObject: Employee
+ * Table In DB: records
+ */
 @Entity
 @Table(name = "records")
 public class Employee {

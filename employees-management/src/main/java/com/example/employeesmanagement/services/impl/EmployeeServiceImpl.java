@@ -12,8 +12,10 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.Optional;
 
+/**
+ * Implement transaction to get data from DB
+ */
 @Service
 @Transactional
 public class EmployeeServiceImpl implements EmployeeService {
@@ -25,12 +27,20 @@ public class EmployeeServiceImpl implements EmployeeService {
     @Autowired
     private final EmployeeMapper employeeMapper;
 
+    /**
+     * @param employeeRepository
+     * @param employeeMapper
+     */
     public EmployeeServiceImpl(EmployeeRepository employeeRepository, EmployeeMapper employeeMapper) {
         this.employeeRepository = employeeRepository;
         this.employeeMapper = employeeMapper;
     }
 
 
+    /**
+     * @param pageable the pageable property to be defined in request.
+     * @return  response data mapping response model
+     */
     @Override
     @Transactional(readOnly = true)
     public Page<EmployeeDTO> findAllEmployees(Pageable pageable) {
@@ -39,6 +49,11 @@ public class EmployeeServiceImpl implements EmployeeService {
         return pageEmployees;
     }
 
+    /**
+     * @param age      the age of employee
+     * @param pageable the pageable property to be defined in request.
+     * @return response data mapping response model
+     */
     @Override
     @Transactional(readOnly = true)
     public Page<EmployeeDTO> findAllByAge(int age, Pageable pageable) {
@@ -47,6 +62,11 @@ public class EmployeeServiceImpl implements EmployeeService {
         return pageEmployees;
     }
 
+    /**
+     * @param id       education level id
+     * @param pageable the pageable property to be defined in request.
+     * @return response data mapping response model
+     */
     @Override
     @Transactional(readOnly = true)
     public Page<EmployeeDTO> findAllByEducationLevel(int id, Pageable pageable) {
@@ -55,19 +75,17 @@ public class EmployeeServiceImpl implements EmployeeService {
         return pageEmployees;
     }
 
+    /**
+     * @param id       occupation id
+     * @param pageable the pageable property to be defined in request.
+     * @return response data mapping response model
+     */
     @Override
     @Transactional(readOnly = true)
     public Page<EmployeeDTO> findAllByOccupation(int id, Pageable pageable) {
         log.debug("Request to get all Employees based on the occupation field is defined");
         Page<EmployeeDTO> pageEmployees= employeeRepository.findAllByOccupation_Id(id,pageable).map(employeeMapper::toDto);
         return pageEmployees;
-    }
-
-    @Override
-    @Transactional(readOnly = true)
-    public Optional<EmployeeDTO> findOne(int id) {
-        log.debug("Request to get all Employees");
-        return employeeRepository.findById(id).map(employeeMapper::toDto);
     }
 
 }

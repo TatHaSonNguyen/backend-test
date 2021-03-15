@@ -6,6 +6,11 @@ import com.example.employeesmanagement.services.dto.EducationLevelDTO;
 import org.mapstruct.Mapper;
 import org.springframework.stereotype.Service;
 
+/**
+ * Mapping and convert between DTOObject and EntityObject
+ * DTOObject: EducationLevelDTO
+ * EntityObject: EducationLevel
+ */
 @Mapper(componentModel = "spring")
 public interface EducationLevelMapper {
 

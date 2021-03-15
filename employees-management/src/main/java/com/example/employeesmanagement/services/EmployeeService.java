@@ -4,8 +4,9 @@ import com.example.employeesmanagement.services.dto.EmployeeDTO;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
-import java.util.Optional;
-
+/**
+ * Define actions to get data and mapping with response model
+ */
 public interface EmployeeService {
 
 
@@ -41,13 +42,6 @@ public interface EmployeeService {
      */
     Page<EmployeeDTO> findAllByOccupation(int id, Pageable pageable);
 
-    /**
-     * Get the "id" employee.
-     *
-     * @param id the id of the entity.
-     * @return the entity.
-     */
-    Optional<EmployeeDTO> findOne(int id);
 
 }
 

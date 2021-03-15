@@ -6,6 +6,11 @@ import com.example.employeesmanagement.services.dto.EmployeeDTO;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 
+/**
+ * Mapping and convert between DTOObject and EntityObject
+ * DTOObject: EmployeeDTO
+ * EntityObject: Employee
+ */
 @Mapper(componentModel = "spring", uses = {CountryMapper.class, EducationLevelMapper.class, MaritalStatusMapper.class, OccupationMapper.class, RaceMapper.class,RelationshipMapper.class,SexMapper.class, Workclass.class})
 public interface EmployeeMapper extends EntityMapper<EmployeeDTO, Employee>{
 

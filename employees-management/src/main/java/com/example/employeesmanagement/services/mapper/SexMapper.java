@@ -4,6 +4,11 @@ import com.example.employeesmanagement.entities.Sex;
 import com.example.employeesmanagement.services.dto.SexDTO;
 import org.mapstruct.Mapper;
 
+/**
+ * Mapping and convert between DTOObject and EntityObject
+ * DTOObject: SexDTO
+ * EntityObject: Sex
+ */
 @Mapper(componentModel = "spring")
 public interface SexMapper {
 
