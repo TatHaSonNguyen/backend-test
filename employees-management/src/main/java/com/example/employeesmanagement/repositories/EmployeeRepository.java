@@ -13,7 +13,7 @@ public interface EmployeeRepository extends JpaRepository<Employee, Integer> {
 
     Page<Employee> findAllByAge(int age, Pageable pageable);
 
-    Page<Employee> findAllByEducationLevel(int id, Pageable pageable);
+    Page<Employee> findAllByEducationLevel_Id(int id, Pageable pageable);
 
-    Page<Employee> findAllByOccupation(int id, Pageable pageable);
+    Page<Employee> findAllByOccupation_Id(int id, Pageable pageable);
 }

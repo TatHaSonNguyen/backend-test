@@ -63,12 +63,16 @@ public class EmployeeResource {
                 switch (aggregationType.toLowerCase()) {
                     case "age":
                         pageEmployees = employeeService.findAllByAge(Integer.parseInt(aggregationValue), pageable);
+                        break;
                     case "education_level_id":
                         pageEmployees = employeeService.findAllByEducationLevel(Integer.parseInt(aggregationValue), pageable);
+                        break;
                     case "occupation_id":
                         pageEmployees = employeeService.findAllByOccupation(Integer.parseInt(aggregationValue), pageable);
+                        break;
                     default:
                         pageEmployees = employeeService.findAllEmployees(pageable);
+                        break;
 
                 }
 
@@ -89,7 +93,7 @@ public class EmployeeResource {
             response.put("under_50k_count", employees.stream().filter(employeeDTO -> !employeeDTO.isOver_50k()).count());
             return new ResponseEntity<>(response, new HttpHeaders(), HttpStatus.OK);
         } catch (Exception e) {
-            response.put("message", "Server Error");
+            response.put("message", "Server Error with error is " + e.getMessage());
             return new ResponseEntity<>(response, new HttpHeaders(), HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }

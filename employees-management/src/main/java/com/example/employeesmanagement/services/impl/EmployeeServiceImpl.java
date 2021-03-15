@@ -51,7 +51,7 @@ public class EmployeeServiceImpl implements EmployeeService {
     @Transactional(readOnly = true)
     public Page<EmployeeDTO> findAllByEducationLevel(int id, Pageable pageable) {
         log.debug("Request to get all Employees based on the education field is defined");
-        Page<EmployeeDTO> pageEmployees= employeeRepository.findAllByEducationLevel(id,pageable).map(employeeMapper::toDto);
+        Page<EmployeeDTO> pageEmployees= employeeRepository.findAllByEducationLevel_Id(id,pageable).map(employeeMapper::toDto);
         return pageEmployees;
     }
 
@@ -59,7 +59,7 @@ public class EmployeeServiceImpl implements EmployeeService {
     @Transactional(readOnly = true)
     public Page<EmployeeDTO> findAllByOccupation(int id, Pageable pageable) {
         log.debug("Request to get all Employees based on the occupation field is defined");
-        Page<EmployeeDTO> pageEmployees= employeeRepository.findAllByOccupation(id,pageable).map(employeeMapper::toDto);
+        Page<EmployeeDTO> pageEmployees= employeeRepository.findAllByOccupation_Id(id,pageable).map(employeeMapper::toDto);
         return pageEmployees;
     }
 
